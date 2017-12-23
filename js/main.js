@@ -71,6 +71,17 @@
     //   }
     // }
     // console.log(bullets);
+    for(var i = 0; i < bullets.length; i++ ){
+
+        console.log(SAT.testPolygonPolygon(bullets[i].satObject, innerSatellite.satObject ))
+        // if(){
+        //   console.log('collided');
+        // }
+
+
+
+
+    }
 
     for(var i = 0; i < bullets.length; i++ ){
       if(!bullets[i].remove){

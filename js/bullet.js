@@ -12,16 +12,16 @@ class Bullet{
     this.velocity = vec2.create(Math.cos(angle - Math.PI/2)* this.speed ,Math.sin(angle - Math.PI/2)* this.speed);
 		this.type = type;
 		this.remove = false;
+		this.satObject = new SAT.Box(new SAT.Vector(this.x - this.width/2 , this.y + this.height/2), this.width, this.height).toPolygon();
 	}
 
 	move(){
     vec2.add(this.pos,this.pos,this.velocity);
-
 		if(this.pos.x > canvas.width || this.pos.x < 0 || this.pos.y < 0 || this.pos.y > canvas.height){
 				this.remove = true;
 		}
 
-		if(this.type == 'alien'){
+		if(this.type == 'enemy'){
 			// console.log(centerY);
 			var distanceBulletPlanetCenter = Math.pow((this.pos.x - centerX),2) +  Math.pow((this.pos.y - centerY),2);
 			// console.log(distanceBulletPlanetCenter);
@@ -40,12 +40,13 @@ class Bullet{
 	draw(){
 		this.move();
 		// console.log(this.color)
-		colorRect(this.pos.x, this.pos.y, this.width, this.height, this.color);
-
-
-
+		colorRect(this.pos.x - this.width/2 , this.pos.y - this.height/2, this.width, this.height, this.color);
 
 	}
+
+	// collision(){
+	//
+	// }
 
 
 

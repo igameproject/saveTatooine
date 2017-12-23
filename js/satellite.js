@@ -13,10 +13,12 @@ class Satellite{
 		this.originalTilt = tilt;
     this.getXY();
 		this.bulletSpeed = 4;
-		this.bulletWidth  = 2;
-		this.bulletHeight  = 2;
+		this.bulletWidth  = 4;
+		this.bulletHeight  = 4;
 		this.bulletColor = bulletColor;
 		this.bulletType = 'satellite';
+		this.satObject = new SAT.Box(new SAT.Vector(this.x - this.width/2 , this.y + this.height/2), this.width, this.height).toPolygon();
+
 	}
 
 	draw(){
@@ -43,7 +45,7 @@ class Satellite{
   }
 
 	shoot(){
-		console.log(this.bulletColor);
+		// console.log(this.bulletColor);
 		bullets.push(new Bullet(this.x,this.y,this.bulletSpeed,this.bulletWidth,this.bulletHeight,this.tilt,this.bulletColor,this.bulletType));
 
 

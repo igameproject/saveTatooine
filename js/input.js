@@ -7,14 +7,14 @@ var rightArrowButtonHold = false;
 
 function addInputs(){
   document.addEventListener('keydown', function(evt){
-    console.log(evt.code)
+    // console.log(evt.code)
     if(evt.code == "KeyZ"){
      innerSatelliteSelected = !innerSatelliteSelected;
     }
 
     if(evt.code  == "ArrowLeft"){
       leftArrowButtonHold = true;
-    
+
     }
 
     if(evt.code  == "ArrowRight"){
