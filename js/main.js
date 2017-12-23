@@ -1,26 +1,26 @@
 
   // save the canvas for dimensions, and its 2d context for drawing to it
-  var canvas, ctx;
-  var height, width;
-  var centerX,centerY;
-  var  dx,dy;
-  var planetAngle = 0;
-  const PLANETANGLECHANGE = 0.001
-  var  a = 0;
-  var planetDia;
-  //
-  // var innerSatelliteAngle = 0;
-  // var innerSatelliteX = innerSatelliteY = 100;
-  //
-  // var outerSatelliteAngle = 0;
-  // var outerSatelliteX = outerSatelliteY = 125;
-  //
-  // var satelliteHeight = 13;
-  // var satelliteWidth = 43;
+  var canvas,
+      ctx,
+      height,
+      width,
+      centerX,
+      centerY,
+      dx,
+      dy,
+      planetAngle = 0,
+      PLANETANGLECHANGE = 0.001,
+      a = 0,
+      planetDia,
+      innerSatellite,
+      outerSatellite,
+      innerSatelliteSelected = false,
+      planetHealth,
+      score;
+      // outerSatelliteSelected = false;
 
-  var  innerSatellite = true;
 
-  // var  outerSatellite = false;
+
 
   window.onload = function() {
     canvas = document.getElementById('gameCanvas');
@@ -29,11 +29,14 @@
     var height = canvas.height = window.innerHeight;
     centerX = width / 2;
     centerY = height / 2;
-    planetDia = planetPic.height;
+    planetDia = 220;
+    planetHealth = 100;
+    score = 0;
     loadImages();
     addInputs();
-    var innerSatellite = new Satellite(100,0.1,0.15,blueSatellitePic);
-    var outerSatellite = new Satellite(125,1,0.3,yellowSatellitePic);
+    innerSatelliteSelected = true;
+    innerSatellite = new Satellite(radius = 130, tilt = 30 , speed =  0.035, pic = blueSatellitePic, bulletColor = "cyan");
+    outerSatellite = new Satellite(radius = 165, tilt = 120 , speed = 0.025, pic = yellowSatellitePic,  bulletColor = "yellow");
 
 
     // these next few lines set up our game logic and render to happen 30 times per second
@@ -49,41 +52,85 @@
     //
     //  });
 
-
-
-
   }
-
-
-
 
   function drawEverything() {
-    // clear the game view by filling it with black
-    // colorRect(0, 0, canvas.width, canvas.height, 'black');
     ctx.drawImage(backgroundPic,0,0); // center, draw
     planetAngle += PLANETANGLECHANGE;
-    drawBitmapCenteredAtLocationWithRotation(planetPic, canvas.width/2, canvas.height/2,planetAngle);
+    drawBitmapCenteredAtLocationWithRotation(planetPic, centerX, centerY,planetAngle);
+    innerSatelliteSelected ? innerSatellite.move() : outerSatellite.move();
     innerSatellite.draw();
-    // ctx.save();
-    // ctx.translate(centerX, centerY);
-    // ctx.rotate(innerSatelliteAngle);
-    // drawBitmapCenteredAtLocationWithRotation(blueSatellitePic, innerSatelliteX, innerSatelliteY ,Math.PI/2*0.1);
-    // ctx.restore();
-    //
-    // ctx.save();
-    // ctx.translate(centerX, centerY);
-    // ctx.rotate(outerSatelliteAngle);
-    // drawBitmapCenteredAtLocationWithRotation(yellowSatellitePic, outerSatelliteX, outerSatelliteY ,Math.PI/2);
-    // ctx.restore();
+    outerSatellite.draw();
+
+    // if(shootKeyHold){
+    //   if(innerSatelliteSelected){
+    //     innerSatellite.shoot();
+    //   }
+    //   else{
+    //     outerSatellite.shoot();
+    //   }
+    // }
+    // console.log(bullets);
+
+    for(var i = 0; i < bullets.length; i++ ){
+      if(!bullets[i].remove){
+        bullets[i].draw();
+      }
+
+    }
+
+    for(var i = 0; i < bullets.length; i++ ){
+      if(bullets[i].remove){
+        bullets.splice(i,1);
+      }
+
+    }
+
+    for(var i = 0; i < enemies.length; i++){
+      if(!enemies[i].remove){
+        enemies[i].draw();
+      }
+
+    }
+
+    for(var i = 0; i < enemies.length; i++ ){
+      if(enemies[i].remove){
+        enemies.splice(i,1);
+      }
+
+    }
+
+    colorText("Bullets: " + bullets.length,5,10,"white","Arial");
+    colorText("Enemies: " + enemies.length,5,20,"white","Arial");
+    colorText("Planet Health: " + planetHealth,5,30,"white","Arial");
+    colorText("Score: " + score,5,40,"white","Arial");
+
+
+
+
   }
-
-
-
 
 function loadingDoneSoStartGame(){
    var framesPerSecond = 60;
     setInterval(function() {
         drawEverything();
+
       }, 1000/framesPerSecond);
+
+    setInterval(function() {
+          enemies.push(new Enemy());
+
+      }, 3000); //2000
+    setInterval(function() {
+      for(var i = 0; i < enemies.length; i++ ){
+        enemies[i].shoot();
+
+      }
+
+    }, 2500); //2500
+    setInterval(function() {
+      score+=10;
+
+    }, 4000); //2500
 
 }

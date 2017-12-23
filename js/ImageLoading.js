@@ -2,6 +2,7 @@ var planetPic=document.createElement("img");
 var blueSatellitePic=document.createElement("img");
 var yellowSatellitePic=document.createElement("img");
 var backgroundPic=document.createElement("img");
+var enemyPic1 = document.createElement("img");
 
 
 
@@ -27,15 +28,17 @@ function loadImages() {
     {varName:backgroundPic, theFile:"background.png"},
     {varName:yellowSatellitePic, theFile:"yellow-satellite.png"},
     {varName:blueSatellitePic, theFile:"blue-satellite.png"},
+    {varName:enemyPic1, theFile:"enemy1.png"},
 
 
-   
+
+
     ];
 
   picsToLoad = imageList.length;
 
   for(var i=0;i<imageList.length;i++) {
       beginLoadingImage(imageList[i].varName, imageList[i].theFile);
-  } 
+  }
 
 }// end of function loadImages
