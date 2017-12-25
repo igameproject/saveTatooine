@@ -22,9 +22,9 @@ class Enemy{
     this.remove = false;
     this.velocity = vec2.create(Math.cos(this.angle + Math.PI/2)* this.speed , Math.sin(this.angle + Math.PI/2)* this.speed);
 		this.bulletSpeed = 6;
-		this.bulletWidth  = 4;
-		this.bulletHeight  = 5;
-    this.bulletColor = "red";
+		this.bulletWidth  = 5;
+		this.bulletHeight  = 10;
+    this.bulletPic = EnemyShotPic;
 		this.bulletType = "enemy";
 		this.satObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon();
 
@@ -54,7 +54,7 @@ class Enemy{
   }
 
 	shoot(){
-          bullets.push(new Bullet(this.pos.x,this.pos.y,this.bulletSpeed,this.bulletWidth,this.bulletHeight,this.angle + Math.PI,this.bulletColor,this.bulletType ));
+          bullets.push(new Bullet(this.pos.x,this.pos.y,this.bulletSpeed,this.bulletWidth,this.bulletHeight,this.angle + Math.PI,this.bulletPic,this.bulletType ));
 
 	}
 

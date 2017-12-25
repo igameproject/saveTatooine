@@ -3,6 +3,11 @@ var blueSatellitePic=document.createElement("img");
 var yellowSatellitePic=document.createElement("img");
 var backgroundPic=document.createElement("img");
 var enemyPic1 = document.createElement("img");
+var blueSatelliteShotPic = document.createElement("img");
+var yellowSatelliteShotPic = document.createElement("img");
+var EnemyShotPic = document.createElement("img");
+
+
 
 
 
@@ -29,6 +34,10 @@ function loadImages() {
     {varName:yellowSatellitePic, theFile:"yellow-satellite.png"},
     {varName:blueSatellitePic, theFile:"blue-satellite.png"},
     {varName:enemyPic1, theFile:"enemy1.png"},
+    {varName:blueSatelliteShotPic, theFile:"blueBullet.png"},
+    {varName:yellowSatelliteShotPic, theFile:"yellowBullet.png"},
+    {varName:EnemyShotPic, theFile:"redBullet.png"},
+
 
 
 

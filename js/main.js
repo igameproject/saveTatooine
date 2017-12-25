@@ -35,8 +35,8 @@
     loadImages();
     addInputs();
     innerSatelliteSelected = true;
-    innerSatellite = new Satellite(radius = 130, tilt = 30 , speed =  0.035, pic = blueSatellitePic, bulletColor = "cyan");
-    outerSatellite = new Satellite(radius = 165, tilt = 120 , speed = 0.025, pic = yellowSatellitePic,  bulletColor = "yellow");
+    innerSatellite = new Satellite(radius = 130, tilt = 30 , speed =  0.035, pic = blueSatellitePic, bulletPic = blueSatelliteShotPic);
+    outerSatellite = new Satellite(radius = 165, tilt = 120 , speed = 0.025, pic = yellowSatellitePic,  bulletPic = yellowSatelliteShotPic);
 
 
     // these next few lines set up our game logic and render to happen 30 times per second
