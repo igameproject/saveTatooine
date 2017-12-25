@@ -3,14 +3,14 @@ let Satellites = [];
 
 class Satellite{
 
-	constructor(radius,tilt,speed,pic,bulletPic){
+	constructor(pic,bulletPic){
     this.angle = 0;
-    this.radius = radius;
+    this.radius = 130;
     this.height = 13;
     this.width = 43;
-    this.speed = speed;
+    this.speed = 0.035;
     this.pic = pic;
-		this.originalTilt = tilt;
+		this.originalTilt = 90;
     this.getXY();
 		this.bulletSpeed = 4;
 		this.bulletWidth  = 5;
@@ -24,6 +24,7 @@ class Satellite{
 	draw(){
         // console.log('hey')
         drawBitmapCenteredAtLocationWithRotation(this.pic, this.x, this.y ,this.tilt);
+
 	}
 
   getXY(tilt){
