@@ -35,8 +35,8 @@
     loadImages();
     addInputs();
     innerSatelliteSelected = true;
-    innerSatellite = new Satellite(pic = blueSatellitePic, bulletPic = blueSatelliteShotPic);
-    outerSatellite = new Satellite(pic = yellowSatellitePic,  bulletPic = yellowSatelliteShotPic);
+    innerSatellite = new Satellite(pic = blueSatellitePic, bulletPic = blueSatelliteShotPic, type='shield' );
+    outerSatellite = new Satellite(pic = yellowSatellitePic,  bulletPic = yellowSatelliteShotPic, type='shooter');
 
 
     // these next few lines set up our game logic and render to happen 30 times per second
@@ -57,8 +57,9 @@
   function drawEverything() {
     ctx.drawImage(backgroundPic,0,0); // center, draw
     planetAngle += PLANETANGLECHANGE;
-    drawBitmapCenteredAtLocationWithRotation(planetPic, centerX, centerY,planetAngle);
-    innerSatelliteSelected ? innerSatellite.move() : outerSatellite.move();
+    drawBitmapCenteredAtLocationWithRotation(planetPic, centerX, centerY, planetAngle);
+    innerSatellite.move();
+    outerSatellite.move();
     innerSatellite.draw();
     outerSatellite.draw();
 
@@ -71,17 +72,17 @@
     //   }
     // }
     // console.log(bullets);
-    for(var i = 0; i < bullets.length; i++ ){
-
-        console.log(SAT.testPolygonPolygon(bullets[i].satObject, innerSatellite.satObject ))
-        // if(){
-        //   console.log('collided');
-        // }
-
-
-
-
-    }
+    // for(var i = 0; i < bullets.length; i++ ){
+    //
+    //     console.log(SAT.testPolygonPolygon(bullets[i].satObject, innerSatellite.satObject ))
+    //     // if(){
+    //     //   console.log('collided');
+    //     // }
+    //
+    //
+    //
+    //
+    // }
 
     for(var i = 0; i < bullets.length; i++ ){
       if(!bullets[i].remove){

@@ -8,9 +8,9 @@ var rightArrowButtonHold = false;
 function addInputs(){
   document.addEventListener('keydown', function(evt){
     // console.log(evt.code)
-    if(evt.code == "KeyZ"){
-     innerSatelliteSelected = !innerSatelliteSelected;
-    }
+    // if(evt.code == "KeyZ"){
+    //  innerSatelliteSelected = !innerSatelliteSelected;
+    // }
 
     if(evt.code  == "ArrowLeft"){
       leftArrowButtonHold = true;
@@ -24,12 +24,10 @@ function addInputs(){
     //shoot shoot
     if(evt.code  == "KeyX"){
       // shootKeyHold = true;
-      if(innerSatelliteSelected){
+
         innerSatellite.shoot();
-      }
-      else{
         outerSatellite.shoot();
-      }
+
     }
 
   });
