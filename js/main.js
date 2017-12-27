@@ -12,15 +12,10 @@
       PLANETANGLECHANGE = 0.001,
       a = 0,
       planetDia,
-      innerSatellite,
-      outerSatellite,
-      innerSatelliteSelected = false,
+      satelliteOne,
+      satelliteTwo,
       planetHealth,
       score;
-      // outerSatelliteSelected = false;
-
-
-
 
   window.onload = function() {
     canvas = document.getElementById('gameCanvas');
@@ -34,55 +29,57 @@
     score = 0;
     loadImages();
     addInputs();
-    innerSatelliteSelected = true;
-    innerSatellite = new Satellite(pic = blueSatellitePic, bulletPic = blueSatelliteShotPic, type='shield' );
-    outerSatellite = new Satellite(pic = yellowSatellitePic,  bulletPic = yellowSatelliteShotPic, type='shooter');
-
-
-    // these next few lines set up our game logic and render to happen 30 times per second
-    // document.body.addEventListener("mousemove", function(event) {
-    //    dx = event.clientX - centerX;
-    //    dy = event.clientY - centerY;
-    //    if(innerSatellite){
-    //      innerSatelliteAngle = Math.atan2(dy, dx);
-    //    }
-    //    else{
-    //      outerSatelliteAngle = Math.atan2(dy, dx);
-    //    }
-    //
-    //  });
-
+    satelliteOne = new Satellite(pic = blueSatellitePic, bulletPic = blueSatelliteShotPic, type='shield');
+    satelliteTwo = new Satellite(pic = yellowSatellitePic,  bulletPic = yellowSatelliteShotPic, type='shooter');
   }
 
   function drawEverything() {
     ctx.drawImage(backgroundPic,0,0); // center, draw
     planetAngle += PLANETANGLECHANGE;
     drawBitmapCenteredAtLocationWithRotation(planetPic, centerX, centerY, planetAngle);
-    innerSatellite.move();
-    outerSatellite.move();
-    innerSatellite.draw();
-    outerSatellite.draw();
+    satelliteOne.move();
+    satelliteTwo.move();
+    satelliteOne.draw();
+    satelliteTwo.draw();
+
 
     // if(shootKeyHold){
-    //   if(innerSatelliteSelected){
-    //     innerSatellite.shoot();
+    //   if(satelliteOneSelected){
+    //     satelliteOne.shoot();
     //   }
     //   else{
-    //     outerSatellite.shoot();
+    //     satelliteTwo.shoot();
     //   }
     // }
     // console.log(bullets);
-    // for(var i = 0; i < bullets.length; i++ ){
-    //
-    //     console.log(SAT.testPolygonPolygon(bullets[i].satObject, innerSatellite.satObject ))
-    //     // if(){
-    //     //   console.log('collided');
-    //     // }
-    //
-    //
-    //
-    //
-    // }
+    for(var i = 0; i < bullets.length; i++ ){
+        // console.log(bullets[i].satObject);
+
+        if(SAT.testPolygonPolygon(bullets[i].satObject, satelliteOne.satObject) &&
+           bullets[i].type == 'enemy'){
+             bullets[i].remove = true;
+             satelliteOne.remove = true;
+
+        }
+
+        if(SAT.testPolygonPolygon(bullets[i].satObject, satelliteTwo.satObject) &&
+           bullets[i].type == 'enemy'){
+             bullets[i].remove = true;
+             satelliteTwo.remove = true;
+        }
+
+
+
+        for(var j = 0; j < enemies.length; j++){
+
+          if(SAT.testPolygonPolygon(bullets[i].satObject, enemies[j].satObject) && bullets[i].type == 'satellite'){
+               bullets[i].remove = true;
+               enemies[j].remove = true;
+          }
+        }
+
+
+    }
 
     for(var i = 0; i < bullets.length; i++ ){
       if(!bullets[i].remove){

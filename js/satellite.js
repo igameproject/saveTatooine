@@ -19,17 +19,22 @@ class Satellite{
 		this.bulletHeight  = 10;
 		this.bulletPic = bulletPic;
 		this.bulletType = 'satellite';
-		this.satObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon();
-
+		//satObject need an initial minimum points //Drawn from bottom.
+		// this.initlalSatObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon();
+		this.satObject;
+		this.remove = false;
 	}
 
 	draw(){
-        // console.log('hey')
-        drawBitmapCenteredAtLocationWithRotation(this.satellitePic, this.pos.x, this.pos.y ,this.tilt);
+
+				if(!this.remove){
+					 drawBitmapCenteredAtLocationWithRotation(this.satellitePic, this.pos.x, this.pos.y ,this.tilt);
+				}
 
 	}
 
   getXY(){
+
 				if(this.type == 'shield'){
 					this.pos.x  = centerX + this.radius * Math.cos(this.angle);
 	        this.pos.y  = centerY + this.radius * Math.sin(this.angle);
@@ -39,27 +44,33 @@ class Satellite{
 	        this.pos.y  = centerY - this.radius * Math.sin(this.angle);
 				}
 
+				//Make it maintain same angle accross entire planet. Give a feel of geostationary.
 				this.tilt = Math.atan2(this.pos.y - canvas.height/2, this.pos.x - canvas.width/2);
 				this.tilt += Math.PI/180 * this.originalTilt ;
+				this.satObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon().rotate(-this.tilt);
   }
 
   move(){
-		if(leftArrowButtonHold){
-      this.angle -= this.speed;
-      this.getXY();
-    }
-    if(rightArrowButtonHold){
-      this.angle += this.speed;
-      this.getXY();
-    }
-		else{
-			this.getXY();
+		if(!this.remove){
+			if(leftArrowButtonHold){
+	      this.angle -= this.speed;
+	      this.getXY();
+	    }
+	    if(rightArrowButtonHold){
+	      this.angle += this.speed;
+	      this.getXY();
+	    }
+			else{
+				this.getXY();
+			}
 		}
   }
 
 	shoot(){
-		// console.log(this.bulletColor);
-		bullets.push(new Bullet(this.pos.x,this.pos.y,this.bulletSpeed,this.bulletWidth,this.bulletHeight,this.tilt,this.bulletPic,this.bulletType));
+
+		if(!this.remove){
+			bullets.push(new Bullet(this.pos.x,this.pos.y,this.bulletSpeed,this.bulletWidth,this.bulletHeight,this.tilt,this.bulletPic,this.bulletType));
+		}
 
 
 	}

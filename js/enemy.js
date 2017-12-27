@@ -26,25 +26,18 @@ class Enemy{
 		this.bulletHeight  = 10;
     this.bulletPic = EnemyShotPic;
 		this.bulletType = "enemy";
-		this.satObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon();
-
+		this.satObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon().rotate(-this.angle);
 
 	}
 
 	draw(){
-
-					// this.shoot();
-
         this.move();
         drawBitmapCenteredAtLocationWithRotation(this.pic, this.pos.x, this.pos.y ,this.angle);
-
   }
-
-
 
   move(){
       vec2.add(this.pos,this.pos,this.velocity);
-
+			this.satObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon().rotate(-this.angle);
       if(this.pos.x > canvas.width || this.pos.x < 0 || this.pos.y < 0 || this.pos.y > canvas.height){
       		this.remove = true;
       }
