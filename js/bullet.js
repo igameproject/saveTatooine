@@ -47,9 +47,6 @@ class Bullet{
 
 	}
 
-	// collision(){
-	//
-	// }
 
 
 

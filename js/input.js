@@ -7,7 +7,7 @@ var rightArrowButtonHold = false;
 
 function addInputs(){
   document.addEventListener('keydown', function(evt){
-    
+
     if(evt.code  == "ArrowLeft"){
       leftArrowButtonHold = true;
 
@@ -20,9 +20,23 @@ function addInputs(){
     //shoot shoot
     if(evt.code  == "KeyX"){
       // shootKeyHold = true;
-
+      if(gameOver){
+        gameReset();
+      }
+      else{
         satelliteOne.shoot();
         satelliteTwo.shoot();
+      }
+    }
+
+    if(evt.code  == "KeyO"){
+      gameOver =!gameOver;
+    }
+
+    if(evt.code  == "KeyD"){
+      // shootKeyHold = true;
+
+        debug = !debug;
 
     }
 

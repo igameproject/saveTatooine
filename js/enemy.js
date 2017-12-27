@@ -41,16 +41,10 @@ class Enemy{
       if(this.pos.x > canvas.width || this.pos.x < 0 || this.pos.y < 0 || this.pos.y > canvas.height){
       		this.remove = true;
       }
-
-
-
   }
 
 	shoot(){
           bullets.push(new Bullet(this.pos.x,this.pos.y,this.bulletSpeed,this.bulletWidth,this.bulletHeight,this.angle + Math.PI,this.bulletPic,this.bulletType ));
-
 	}
-
-
 
 }

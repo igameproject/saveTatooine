@@ -20,8 +20,10 @@ function drawBall(centerX,centerY,radius,fillColor) {
 }
 
 function colorText(showWords,textX,textY,fillColor,fontface,textAlign = 'left' ) {
+  ctx.save();
 	ctx.textAlign = textAlign;
 	ctx.font = fontface;
 	ctx.fillStyle = fillColor;
 	ctx.fillText(showWords, textX, textY);
+  ctx.restore();
 }
