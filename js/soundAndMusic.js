@@ -1,13 +1,15 @@
 var audioFormat;
 
-var regularShotSound = new SoundOverlapsClass("./audio/RegularShot");
-var shieldPowerUpSound = new SoundOverlapsClass("./audio/enemyShot");
-var collisionPlanetSound = new SoundOverlapsClass("./audio/enemyShot");
+var satelliteShotSound = new SoundOverlapsClass("./audio/bulletShoot");
+var powerUpSound = new SoundOverlapsClass("./audio/enemyShot");
+var planetHurtSound = new SoundOverlapsClass("./audio/enemyShot");
+var satelliteHurtSound = new SoundOverlapsClass("./audio/enemyShot");
 var collisionSatelliteSound = new SoundOverlapsClass("./audio/enemyShot");
+var enemyShotSound = new  SoundOverlapsClass("./audio/enemyShot");
 
-var zebesBackgroundMusic = new backgroundMusicClass("./audio/dew-drops");
+// var zebesBackgroundMusic = new backgroundMusicClass("./audio/dew-drops");
 var computerBackgroundMusic = new backgroundMusicClass("./audio/suspain");
-var menuMusic = new backgroundMusicClass("./audio/beeblebrox");
+// var menuMusic = new backgroundMusicClass("./audio/beeblebrox");
 
 var currentBackgroundMusic;
 
