@@ -37,7 +37,7 @@ class Enemy{
 
   move(){
       vec2.add(this.pos,this.pos,this.velocity);
-			this.satObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon().rotate(-this.angle);
+			this.satObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon().rotate(-this.angle + 0.145);
       if(this.pos.x > canvas.width || this.pos.x < 0 || this.pos.y < 0 || this.pos.y > canvas.height){
       		this.remove = true;
       }

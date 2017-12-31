@@ -12,7 +12,7 @@ class Bullet{
     this.velocity = vec2.create(Math.cos(angle - Math.PI/2)* this.speed ,Math.sin(angle - Math.PI/2)* this.speed);
 		this.type = type;
 		this.remove = false;
-		this.satObject = new SAT.Box(new SAT.Vector(x - width/2 , y + height/2), width, height).toPolygon().rotate(angle - Math.PI/2);
+		this.satObject = new SAT.Box(new SAT.Vector(x - width/2 , y + height/2), width, height).toPolygon().rotate(angle - Math.PI/2 -  0.145);
 	}
 
 	move(){

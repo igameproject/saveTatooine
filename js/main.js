@@ -59,6 +59,7 @@
     enemySpawnRate = 3000;
     shieldActivated = false;
     swirling = false;
+    initExplosions();
 
 
 
@@ -161,7 +162,6 @@
 
             }
 
-            console.log(powerups)
             //satellite enemy collisons
             for(var j = 0; j < enemies.length; j++){
 
@@ -172,6 +172,10 @@
                    satelliteHurtSound.play();
                    enemyHurtSound.play();
 
+                   playerHitExplosion(satelliteOne.pos.x, satelliteOne.pos.y);
+                   enemyHitExplosion(enemies[j].pos.x, enemies[j].pos.y);
+
+
               }
               if(SAT.testPolygonPolygon(satelliteTwo.satObject, enemies[j].satObject)){
                    satelliteTwo.lives--;
@@ -179,6 +183,9 @@
                    score += 15;
                    satelliteHurtSound.play();
                    enemyHurtSound.play();
+                   playerHitExplosion(satelliteTwo.pos.x, satelliteTwo.pos.y)
+                   enemyHitExplosion(enemies[j].pos.x, enemies[j].pos.y)
+
               }
             }
 
@@ -203,12 +210,21 @@
 
 
 
+
             if(satelliteOne.lives<=0){
               satelliteOne.remove = true;
             }
+            else{
+              satelliteOne.remove = false;
+
+            }
+
 
             if(satelliteTwo.lives<=0){
               satelliteTwo.remove = true;
+            }
+            else{
+              satelliteTwo.remove = false;
             }
 
             if(satelliteTwo.lives<=0 && satelliteOne.lives<=0){
@@ -257,6 +273,9 @@
               }
 
             }
+            updateExplosions();
+            drawExplosions();
+
             if(shieldActivated){
               ctx.drawImage(shieldPic,centerX - 260/2,centerY -260/2);
             }

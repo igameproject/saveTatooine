@@ -46,7 +46,7 @@ function loadImages() {
     {varName:swirlPowerupPic, theFile:"swirlPowerup.png"},
     {varName:shieldPowerupPic, theFile:"shieldPowerup.png"},
     {varName:healthPowerupPic, theFile:"healthPowerup.png"},
-    {varName:scorePowerupPic, theFile:"healthPowerup.png"},//change this
+    {varName:scorePowerupPic, theFile:"scorePowerup.png"}
 
 
 
