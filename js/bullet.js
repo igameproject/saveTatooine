@@ -27,14 +27,44 @@ class Bullet{
 			var distanceBulletPlanetCenter = Math.pow((this.pos.x - centerX),2) +  Math.pow((this.pos.y - centerY),2);
 			// console.log(distanceBulletPlanetCenter);
 			//  console.log(Math.pow((planetDia/2),2));
-
-			if(distanceBulletPlanetCenter < Math.pow((planetDia/2),2) ){
-				// console.log('Bullet touches planet');
-				this.remove = true;
-				planetHealth-=5;
-				explosionSound.play();
+			if(shieldActivated){
+				distanceBulletPlanetCenter = Math.pow((this.pos.x - centerX)/1.2,2) +  Math.pow((this.pos.y - centerY)/1.2,2);
+				if(distanceBulletPlanetCenter < Math.pow((planetDia/2),2) ){
+					// console.log('Bullet touches planet');
+					this.remove = true;
+				}
 			}
+			else{
+				if(distanceBulletPlanetCenter < Math.pow((planetDia/2),2) ){
+					// console.log('Bullet touches planet');
+					this.remove = true;
+					planetHealth-=5;
+					explosionSound.play();
+				}
+			}
+
+
 		}
+
+		// if(shieldActivated){
+		// 	distanceEnemyPlanetCenter = Math.pow((this.pos.x - centerX)/1.2,2) +  Math.pow((this.pos.y - centerY)/1.2,2);
+		// 	if(distanceEnemyPlanetCenter < Math.pow((planetDia/2),2) ){
+		// 		// console.log('Bullet touches planet');
+		// 		this.remove = true;
+		// 		enemyHurtSound.play();
+		// 	}
+		// }
+		// else{
+		// 	distanceEnemyPlanetCenter = Math.pow((this.pos.x - centerX)*3,2) +  Math.pow((this.pos.y - centerY)*3,2);
+		// 	if(distanceEnemyPlanetCenter < Math.pow((planetDia/2),2) ){
+		// 		// console.log('Bullet touches planet');
+		// 		this.remove = true;
+		// 		planetHealth-=10;
+		// 		explosionSound.play();
+		// 		enemyHurtSound.play();
+		//
+		// 	}
+		// }
 
 		// if(this.pos.x )
 	}

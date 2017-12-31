@@ -26,6 +26,10 @@
         firstLoad : true
   };
 
+  //powerups
+  var shieldActivated;
+  var swirling;
+
   var gameUpdate;
   var enemyShipSpawn;
   var bulletSpawn;
@@ -33,7 +37,7 @@
   var enemySpawnRate;
   var levelIncrement;
   var gameLoaded=false;
-  menuMusicSound.loopSong();
+  var music = menuMusicSound.loopSong();
 
   window.onload = function() {
     canvas = document.getElementById('gameCanvas');
@@ -53,6 +57,8 @@
     satelliteTwo = new Satellite(pic = yellowSatellitePic,  bulletPic = yellowSatelliteShotPic, type='shooter');
     bulletSpawnRate = 2500;
     enemySpawnRate = 3000;
+    shieldActivated = false;
+    swirling = false;
 
 
 
@@ -110,7 +116,7 @@
                      satelliteHurtSound.play();
 
                 }
-
+                // enemy hurt.
                 for(var j = 0; j < enemies.length; j++){
 
                   if(SAT.testPolygonPolygon(bullets[i].satObject, enemies[j].satObject) && bullets[i].type == 'satellite'){
@@ -118,6 +124,8 @@
                        enemies[j].remove = true;
                        score += 30;
                        enemyHurtSound.play();
+                       //Creating a random Powerup.
+                       
                   }
                 }
 
@@ -190,6 +198,9 @@
                 enemies.splice(i,1);
               }
 
+            }
+            if(shieldActivated){
+              ctx.drawImage(shieldPic,centerX - 260/2,centerY -260/2);
             }
             colorRect(0,0,planetHealth * canvas.width/100,40,'#b20000')
             colorText("Planet Health",5,30,"black","30px Arial");

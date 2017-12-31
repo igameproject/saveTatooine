@@ -7,6 +7,7 @@ function windowOnFocus() {
 	if(!windowState.inFocus) {
     console.log('focussed');
 
+
 		windowState.inFocus = true;
 		gameUpdate = setInterval(drawEverything, 1000/60);
     bulletSpawn = setInterval(function() {
@@ -62,7 +63,12 @@ function addInputs(){
   window.addEventListener("focus", windowOnFocus);
  	window.addEventListener("blur", windowOnBlur);
   document.addEventListener('keydown', function(evt){
-
+		if(evt.code  == "Digit1"){
+			shieldActivated = !shieldActivated;
+		}
+		if(evt.code  == "Digit2"){
+			swirling = !swirling;
+		}
 
     if(evt.code  == "Enter"){
       if(windowState.firstLoad){
@@ -101,11 +107,11 @@ function addInputs(){
 
     //shoot shoot
     if(evt.code  == "KeyX"){
-
-        // satelliteOne.shoot();
-        // satelliteTwo.shoot();
-				// satelliteShotSound.play();
-				// setTimeout(function(){console.log('Doing Nothing')},10000)
+			if(swirling){
+        satelliteOne.shoot();
+        satelliteTwo.shoot();
+				satelliteShotSound.play();
+			}
 
     }
     if(evt.code  == "KeyZ"){
@@ -144,9 +150,11 @@ function addInputs(){
 
     //shoot shoot
     if(evt.code  == "KeyX"){
-			satelliteOne.shoot();
-			satelliteTwo.shoot();
-			satelliteShotSound.play();
+			if(!swirling){
+        satelliteOne.shoot();
+        satelliteTwo.shoot();
+				satelliteShotSound.play();
+			}
     }
 
   });

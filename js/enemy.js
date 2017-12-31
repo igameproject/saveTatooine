@@ -41,16 +41,30 @@ class Enemy{
       if(this.pos.x > canvas.width || this.pos.x < 0 || this.pos.y < 0 || this.pos.y > canvas.height){
       		this.remove = true;
       }
-			var distanceEnemyPlanetCenter = Math.pow((this.pos.x - centerX)*3,2) +  Math.pow((this.pos.y - centerY)*3,2);
+			var distanceEnemyPlanetCenter;
 			// console.log(distanceEnemyPlanetCenter);
 			//  console.log(Math.pow((planetDia/2),2));
-
-			if(distanceEnemyPlanetCenter < Math.pow((planetDia/2),2) ){
-				// console.log('Bullet touches planet');
-				this.remove = true;
-				planetHealth-=10;
-				explosionSound.play();
+			if(shieldActivated){
+				distanceEnemyPlanetCenter = Math.pow((this.pos.x - centerX)/1.2,2) +  Math.pow((this.pos.y - centerY)/1.2,2);
+				if(distanceEnemyPlanetCenter < Math.pow((planetDia/2),2) ){
+					// console.log('Bullet touches planet');
+					this.remove = true;
+					enemyHurtSound.play();
+				}
 			}
+			else{
+				distanceEnemyPlanetCenter = Math.pow((this.pos.x - centerX)*3,2) +  Math.pow((this.pos.y - centerY)*3,2);
+				if(distanceEnemyPlanetCenter < Math.pow((planetDia/2),2) ){
+					// console.log('Bullet touches planet');
+					this.remove = true;
+					planetHealth-=10;
+					explosionSound.play();
+					enemyHurtSound.play();
+
+				}
+			}
+
+
   }
 
 	shoot(){
