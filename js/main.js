@@ -32,6 +32,7 @@
   var enemySpawnRate;
   var levelIncrement;
   var gameLoaded=false;
+  menuMusicSound.loopSong();
 
   window.onload = function() {
     canvas = document.getElementById('gameCanvas');
@@ -51,6 +52,7 @@
     satelliteTwo = new Satellite(pic = yellowSatellitePic,  bulletPic = yellowSatelliteShotPic, type='shooter');
     bulletSpawnRate = 2500;
     enemySpawnRate = 3000;
+
 
 
   }
@@ -97,12 +99,14 @@
                    bullets[i].type == 'enemy'){
                      bullets[i].remove = true;
                      satelliteOne.lives--;
+                     satelliteHurtSound.play();
                 }
 
                 if(SAT.testPolygonPolygon(bullets[i].satObject, satelliteTwo.satObject) &&
                    bullets[i].type == 'enemy'){
                      bullets[i].remove = true;
                      satelliteTwo.lives--;
+                     satelliteHurtSound.play();
 
                 }
 
@@ -112,6 +116,7 @@
                        bullets[i].remove = true;
                        enemies[j].remove = true;
                        score += 30;
+                       enemyHurtSound.play();
                   }
                 }
 
@@ -119,6 +124,7 @@
                  if(SAT.testPolygonPolygon(bullets[i].satObject, bullets[k].satObject)){
                       bullets[i].remove = true;
                       bullets[k].remove = true;
+
                  }
                }
 
@@ -131,11 +137,16 @@
                    satelliteOne.lives--;
                    enemies[j].remove = true;
                    score += 15;
+                   satelliteHurtSound.play();
+                   enemyHurtSound.play();
+
               }
               if(SAT.testPolygonPolygon(satelliteTwo.satObject, enemies[j].satObject)){
                    satelliteTwo.lives--;
                    enemies[j].remove = true;
                    score += 15;
+                   satelliteHurtSound.play();
+                   enemyHurtSound.play();
               }
             }
 
@@ -213,9 +224,13 @@
             }
 
           }
-          else{
+          else if(gameOver){
             colorText("Final Score - " + score, canvas.width/2 , canvas.height/2 -  60 ,"white"," 50px Arial","center");
             colorText("Game Over . Press Z to restart", canvas.width/2 , canvas.height/2,"white"," 40px Arial","center");
+            clearInterval(enemyShipSpawn);
+            clearInterval(bulletSpawn);
+            clearInterval(levelIncrement);
+
           }
 
       }
@@ -228,52 +243,51 @@
   function loadingDoneSoStartGame(){
     var framesPerSecond = 60;
     gameUpdate = setInterval(drawEverything, 1000/framesPerSecond);
+    spawningObjects();
+  }
 
-
-      enemyShipSpawn =  setInterval(function() {
-        if(!gameOver && gameLoaded){
-              enemies.push(new Enemy());
-        }
-      }, enemySpawnRate); //2000'
-
-      bulletSpawn = setInterval(function() {
-        if(!gameOver && gameLoaded){
-          for(var i = 0; i < enemies.length; i++ ){
-            enemies[i].shoot();
-          }
-        }
-      }, bulletSpawnRate); //2500
-
-
-    levelIncrement = setInterval(function(){
+  function spawningObjects(){
+    enemyShipSpawn =  setInterval(function() {
       if(!gameOver && gameLoaded){
-        if(enemySpawnRate > 1000){
-          enemySpawnRate -= 500
-          clearInterval(enemyShipSpawn);
+            enemies.push(new Enemy());
+      }
+    }, enemySpawnRate); //2000'
 
-          enemyShipSpawn =  setInterval(function() {
-                  enemies.push(new Enemy());
-              }, enemySpawnRate); //2000'
-
-
+    bulletSpawn = setInterval(function() {
+      if(!gameOver && gameLoaded){
+        for(var i = 0; i < enemies.length; i++ ){
+          enemies[i].shoot();
         }
-        if (bulletSpawnRate > 1500){
-          bulletSpawnRate -= 100;
-          clearInterval(bulletSpawn);
+      }
+    }, bulletSpawnRate); //2500
 
-          bulletSpawn = setInterval(function() {
-              for(var i = 0; i < enemies.length; i++ ){
-                    enemies[i].shoot();
-                  }
-          }, bulletSpawnRate); //2500
-        }
+
+  levelIncrement = setInterval(function(){
+    if(!gameOver && gameLoaded){
+      if(enemySpawnRate > 1000){
+        enemySpawnRate -= 500
+        clearInterval(enemyShipSpawn);
+
+        enemyShipSpawn =  setInterval(function() {
+                enemies.push(new Enemy());
+            }, enemySpawnRate); //2000'
+
 
       }
+      if (bulletSpawnRate > 1500){
+        bulletSpawnRate -= 100;
+        clearInterval(bulletSpawn);
 
-    }, 20000)
+        bulletSpawn = setInterval(function() {
+            for(var i = 0; i < enemies.length; i++ ){
+                  enemies[i].shoot();
+                }
+        }, bulletSpawnRate); //2500
+      }
 
+    }
 
-
+  }, 20000)
   }
 
 function gameReset(){
@@ -286,4 +300,7 @@ function gameReset(){
   enemies = [];
   bulletSpawnRate = 2500;
   enemySpawnRate = 3000;
+  spawningObjects();
+
+
 }

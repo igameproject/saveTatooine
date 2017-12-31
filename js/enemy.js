@@ -45,6 +45,7 @@ class Enemy{
 
 	shoot(){
           bullets.push(new Bullet(this.pos.x,this.pos.y,this.bulletSpeed,this.bulletWidth,this.bulletHeight,this.angle + Math.PI,this.bulletPic,this.bulletType ));
+					enemyShotSound.play();
 	}
 
 }

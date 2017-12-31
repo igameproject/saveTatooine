@@ -68,10 +68,14 @@ function addInputs(){
       if(windowState.firstLoad){
   				windowState.firstLoad = false;
   				gameLoaded = true;
+					menuMusicSound.startOrStopMusic();
+					mainMusicSound.loopSong();
   			}
   		if(windowState.help){
   				windowState.help = false;
   				gameLoaded = true;
+					menuMusicSound.startOrStopMusic();
+					mainMusicSound.loopSong();
   		}
     }
 
@@ -100,6 +104,7 @@ function addInputs(){
 
         satelliteOne.shoot();
         satelliteTwo.shoot();
+				satelliteShotSound.play();
 
     }
     if(evt.code  == "KeyZ"){

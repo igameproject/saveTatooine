@@ -32,6 +32,7 @@ class Bullet{
 				// console.log('Bullet touches planet');
 				this.remove = true;
 				planetHealth-=5;
+				explosionSound.play();
 			}
 		}
 
