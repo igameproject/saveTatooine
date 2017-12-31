@@ -6,6 +6,11 @@ var enemyPic1 = document.createElement("img");
 var blueSatelliteShotPic = document.createElement("img");
 var yellowSatelliteShotPic = document.createElement("img");
 var EnemyShotPic = document.createElement("img");
+var shieldPic = document.createElement("img");
+var shieldPowerupPic = document.createElement("img");
+var healthPowerupPic = document.createElement("img");
+var swirlPowerupPic = document.createElement("img");
+var scorePowerupPic = document.createElement("img");
 
 
 
@@ -37,6 +42,14 @@ function loadImages() {
     {varName:blueSatelliteShotPic, theFile:"blueBullet.png"},
     {varName:yellowSatelliteShotPic, theFile:"yellowBullet.png"},
     {varName:EnemyShotPic, theFile:"redBullet.png"},
+    {varName:shieldPic, theFile:"shield.png"},
+    {varName:swirlPowerupPic, theFile:"swirlPowerup.png"},
+    {varName:shieldPowerupPic, theFile:"shieldPowerup.png"},
+    {varName:healthPowerupPic, theFile:"healthPowerup.png"},
+    {varName:scorePowerupPic, theFile:"scorePowerup.png"}
+
+
+
 
 
 

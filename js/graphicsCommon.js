@@ -19,10 +19,11 @@ function drawBall(centerX,centerY,radius,fillColor) {
 	ctx.fill();
 }
 
-function colorText(showWords,textX,textY,fillColor,fontface,textAlign = 'left' ) {
+function colorText(showWords,textX,textY,fillColor,fontface,textAlign = 'left',opacity  = 1 ) {
   ctx.save();
 	ctx.textAlign = textAlign;
 	ctx.font = fontface;
+  ctx.globalAlpha = opacity;
 	ctx.fillStyle = fillColor;
 	ctx.fillText(showWords, textX, textY);
   ctx.restore();

@@ -12,7 +12,7 @@ class Bullet{
     this.velocity = vec2.create(Math.cos(angle - Math.PI/2)* this.speed ,Math.sin(angle - Math.PI/2)* this.speed);
 		this.type = type;
 		this.remove = false;
-		this.satObject = new SAT.Box(new SAT.Vector(x - width/2 , y + height/2), width, height).toPolygon().rotate(angle - Math.PI/2);
+		this.satObject = new SAT.Box(new SAT.Vector(x - width/2 , y + height/2), width, height).toPolygon().rotate(angle - Math.PI/2 -  0.145);
 	}
 
 	move(){
@@ -27,13 +27,44 @@ class Bullet{
 			var distanceBulletPlanetCenter = Math.pow((this.pos.x - centerX),2) +  Math.pow((this.pos.y - centerY),2);
 			// console.log(distanceBulletPlanetCenter);
 			//  console.log(Math.pow((planetDia/2),2));
-
-			if(distanceBulletPlanetCenter < Math.pow((planetDia/2),2) ){
-				// console.log('Bullet touches planet');
-				this.remove = true;
-				planetHealth-=5;
+			if(shieldActivated){
+				distanceBulletPlanetCenter = Math.pow((this.pos.x - centerX)/1.2,2) +  Math.pow((this.pos.y - centerY)/1.2,2);
+				if(distanceBulletPlanetCenter < Math.pow((planetDia/2),2) ){
+					// console.log('Bullet touches planet');
+					this.remove = true;
+				}
 			}
+			else{
+				if(distanceBulletPlanetCenter < Math.pow((planetDia/2),2) ){
+					// console.log('Bullet touches planet');
+					this.remove = true;
+					planetHealth-=5;
+					explosionSound.play();
+				}
+			}
+
+
 		}
+
+		// if(shieldActivated){
+		// 	distanceEnemyPlanetCenter = Math.pow((this.pos.x - centerX)/1.2,2) +  Math.pow((this.pos.y - centerY)/1.2,2);
+		// 	if(distanceEnemyPlanetCenter < Math.pow((planetDia/2),2) ){
+		// 		// console.log('Bullet touches planet');
+		// 		this.remove = true;
+		// 		enemyHurtSound.play();
+		// 	}
+		// }
+		// else{
+		// 	distanceEnemyPlanetCenter = Math.pow((this.pos.x - centerX)*3,2) +  Math.pow((this.pos.y - centerY)*3,2);
+		// 	if(distanceEnemyPlanetCenter < Math.pow((planetDia/2),2) ){
+		// 		// console.log('Bullet touches planet');
+		// 		this.remove = true;
+		// 		planetHealth-=10;
+		// 		explosionSound.play();
+		// 		enemyHurtSound.play();
+		//
+		// 	}
+		// }
 
 		// if(this.pos.x )
 	}

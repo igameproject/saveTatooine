@@ -19,7 +19,7 @@ class Satellite{
 		this.bulletHeight  = 10;
 		this.bulletPic = bulletPic;
 		this.bulletType = 'satellite';
-		this.lives = 3;
+		this.lives = 5;
 		//satObject need an initial minimum points //Drawn from bottom.
 		// this.initlalSatObject = new SAT.Box(new SAT.Vector(this.pos.x - this.width/2 , this.pos.y + this.height/2), this.width, this.height).toPolygon();
 		this.satObject;
