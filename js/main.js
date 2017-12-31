@@ -18,7 +18,7 @@
   var score;
   var gameOver,debug = false;
   var opacity;
-  
+
 
   var windowState = {
         inFocus : true,
@@ -76,9 +76,9 @@
         planetAngle += PLANETANGLECHANGE;
         drawBitmapCenteredAtLocationWithRotation(planetPic, centerX, canvas.height , planetAngle);
         colorText("Save the planet by destroying incoming spaceships",canvas.width/2,200 ,"white","30px Tahoma","center",opacity);
-        colorText("Arrow Keys for Movements",canvas.width/2 ,250 ,"#b20000","15px Tahoma","center",opacity);
-        colorText("[X] for Shooting",canvas.width/2,280 ,"#b20000","15px Tahoma","center",opacity);
-        colorText('Press [Enter] to Start game',canvas.width/2 ,canvas.height/2 ,"white","20px Tahoma","center",opacity);
+        colorText("Arrow Keys for Movements",canvas.width/2 ,250 ,"#b20000","20px Tahoma","center",opacity);
+        colorText("[X] for Shooting",canvas.width/2,280 ,"#b20000","20px Tahoma","center",opacity);
+        colorText('Press [Enter] to Start game',canvas.width/2 ,canvas.height/2 ,"white","25px Tahoma","center",opacity);
         opacity = opacity + 0.005;
       }
 
@@ -195,14 +195,14 @@
             colorText("Planet Health",5,30,"black","30px Arial");
             colorText("Score: " + score,5,60,"white","20px Arial",);
             if(satelliteOne.lives > 0){
-              colorText("Satellite-1 Life: " + satelliteOne.lives,5,90,"white","20px Arial");
+              colorText("Satellite-1 Life: " + satelliteOne.lives,5,90,"cyan","20px Arial");
             }
             else{
               colorText("Satellite-1 Dead" ,5,90,"red","20px Arial");
             }
 
             if(satelliteTwo.lives > 0){
-              colorText("Satellite-2 Life: " + satelliteTwo.lives,5,120,"white","20px Arial");
+              colorText("Satellite-2 Life: " + satelliteTwo.lives,5,120,"yellow","20px Arial");
             }
             else{
               colorText("Satellite-2 Dead" ,5,120,"red","20px Arial");
@@ -227,7 +227,7 @@
           }
           else if(gameOver){
             colorText("Final Score - " + score, canvas.width/2 , canvas.height/2 -  60 ,"white"," 50px Arial","center");
-            colorText("Game Over . Press Z to restart", canvas.width/2 , canvas.height/2,"white"," 40px Arial","center");
+            colorText("Game Over . Press Z to restart", canvas.width/2 , canvas.height/2,"#f20000"," 40px Arial","center");
             clearInterval(enemyShipSpawn);
             clearInterval(bulletSpawn);
             clearInterval(levelIncrement);
@@ -248,47 +248,50 @@
   }
 
   function spawningObjects(){
-    enemyShipSpawn =  setInterval(function() {
-      if(!gameOver && gameLoaded){
-            enemies.push(new Enemy());
-      }
-    }, enemySpawnRate); //2000'
-
-    bulletSpawn = setInterval(function() {
-      if(!gameOver && gameLoaded){
-        for(var i = 0; i < enemies.length; i++ ){
-          enemies[i].shoot();
+    if(!windowState.help){
+      enemyShipSpawn =  setInterval(function() {
+        if(!gameOver && gameLoaded){
+              enemies.push(new Enemy());
         }
-      }
-    }, bulletSpawnRate); //2500
+      }, enemySpawnRate); //2000'
+
+      bulletSpawn = setInterval(function() {
+        if(!gameOver && gameLoaded){
+          for(var i = 0; i < enemies.length; i++ ){
+            enemies[i].shoot();
+          }
+        }
+      }, bulletSpawnRate); //2500
 
 
-  levelIncrement = setInterval(function(){
-    if(!gameOver && gameLoaded){
-      if(enemySpawnRate > 1000){
-        enemySpawnRate -= 500
-        clearInterval(enemyShipSpawn);
+      levelIncrement = setInterval(function(){
+        if(!gameOver && gameLoaded){
+          if(enemySpawnRate > 1000){
+            enemySpawnRate -= 500
+            clearInterval(enemyShipSpawn);
 
-        enemyShipSpawn =  setInterval(function() {
-                enemies.push(new Enemy());
-            }, enemySpawnRate); //2000'
+            enemyShipSpawn =  setInterval(function() {
+                    enemies.push(new Enemy());
+                }, enemySpawnRate); //2000'
 
 
-      }
-      if (bulletSpawnRate > 1500){
-        bulletSpawnRate -= 100;
-        clearInterval(bulletSpawn);
+          }
+          if (bulletSpawnRate > 1500){
+            bulletSpawnRate -= 100;
+            clearInterval(bulletSpawn);
 
-        bulletSpawn = setInterval(function() {
-            for(var i = 0; i < enemies.length; i++ ){
-                  enemies[i].shoot();
-                }
-        }, bulletSpawnRate); //2500
-      }
+            bulletSpawn = setInterval(function() {
+                for(var i = 0; i < enemies.length; i++ ){
+                      enemies[i].shoot();
+                    }
+            }, bulletSpawnRate); //2500
+          }
 
+        }
+
+      }, 20000)
     }
 
-  }, 20000)
   }
 
 function gameReset(){
