@@ -125,7 +125,28 @@
                        score += 30;
                        enemyHurtSound.play();
                        //Creating a random Powerup.
-                       
+                       let random = Math.floor(Math.random() * 10);
+                       if(random == 0){
+                            let decideWhichPowerup = Math.ceil(Math.random() * 4);
+                            let powerup;
+                            switch(decideWhichPowerup){
+                                case 1:
+                                    powerup = new Powerup(enemies[j].pos,enemies[j].velocity,enemies[j].angle ,shieldPowerupPic,"shield");
+                                    break;
+                                case 2:
+                                    powerup = new Powerup(enemies[j].pos,enemies[j].velocity,enemies[j].angle,scorePowerupPic,"extraScore");
+                                    break;
+                                case 3:
+                                    powerup = new Powerup(enemies[j].pos,enemies[j].velocity,enemies[j].angle,swirlPowerupPic,"swirlPowerup");
+                                    break;
+                                case 4:
+                                    powerup = new Powerup(enemies[j].pos,enemies[j].velocity,enemies[j].angle,healthPowerupPic,"healthPowerup");
+                                    break;
+                            }
+                            powerups.push(powerup);
+
+
+                        }
                   }
                 }
 
@@ -140,6 +161,8 @@
 
             }
 
+            console.log(powerups)
+            //satellite enemy collisons
             for(var j = 0; j < enemies.length; j++){
 
               if(SAT.testPolygonPolygon(satelliteOne.satObject, enemies[j].satObject)){
@@ -159,6 +182,27 @@
               }
             }
 
+            // satellite powerups collisions
+            for(var j = 0; j < powerups.length; j++){
+
+              if(SAT.testPolygonPolygon(satelliteOne.satObject, powerups[j].satObject)){
+
+                   powerups[j].remove = true;
+                   powerups[j].actionForPowerup();
+                   powerupSound.play();
+
+              }
+              if(SAT.testPolygonPolygon(satelliteTwo.satObject, powerups[j].satObject)){
+
+                   powerups[j].remove = true;
+                   powerups[j].actionForPowerup();
+                   powerupSound.play();
+
+              }
+            }
+
+
+
             if(satelliteOne.lives<=0){
               satelliteOne.remove = true;
             }
@@ -172,6 +216,7 @@
             }
 
 
+            //drawing and removing
             for(var i = 0; i < bullets.length; i++ ){
               if(!bullets[i].remove){
                 bullets[i].draw();
@@ -196,6 +241,19 @@
             for(var i = 0; i < enemies.length; i++ ){
               if(enemies[i].remove){
                 enemies.splice(i,1);
+              }
+
+            }
+            for(var i = 0; i < powerups.length; i++ ){
+            if(powerups[i].remove){
+              powerups.splice(i,1);
+              }
+
+            }
+
+            for(var i = 0; i < powerups.length; i++){
+              if(!powerups[i].remove){
+                powerups[i].draw();
               }
 
             }

@@ -4,7 +4,7 @@ var rightArrowButtonHold = false;
 // var shootKeyHold = false;
 
 function windowOnFocus() {
-	if(!windowState.inFocus) {
+	if(!windowState.inFocus && !gameOver && gameLoaded) {
     console.log('focussed');
 
 
