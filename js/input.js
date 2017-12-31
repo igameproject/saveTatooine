@@ -102,9 +102,10 @@ function addInputs(){
     //shoot shoot
     if(evt.code  == "KeyX"){
 
-        satelliteOne.shoot();
-        satelliteTwo.shoot();
-				satelliteShotSound.play();
+        // satelliteOne.shoot();
+        // satelliteTwo.shoot();
+				// satelliteShotSound.play();
+				// setTimeout(function(){console.log('Doing Nothing')},10000)
 
     }
     if(evt.code  == "KeyZ"){
@@ -142,9 +143,11 @@ function addInputs(){
     }
 
     //shoot shoot
-    // if(evt.code  == "KeyX"){
-    //   shootKeyHold = false;
-    // }
+    if(evt.code  == "KeyX"){
+			satelliteOne.shoot();
+			satelliteTwo.shoot();
+			satelliteShotSound.play();
+    }
 
   });
 }

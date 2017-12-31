@@ -18,6 +18,7 @@
   var score;
   var gameOver,debug = false;
   var opacity;
+  
 
   var windowState = {
         inFocus : true,
