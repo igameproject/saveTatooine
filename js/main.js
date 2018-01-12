@@ -85,7 +85,9 @@
         colorText("Save the planet by destroying incoming spaceships",canvas.width/2,200 ,"white","30px Tahoma","center",opacity);
         colorText("Arrow Keys for Movements",canvas.width/2 ,250 ,"#b20000","20px Tahoma","center",opacity);
         colorText("[X] for Shooting",canvas.width/2,280 ,"#b20000","20px Tahoma","center",opacity);
+
         colorText('Press [Enter] to Start game',canvas.width/2 ,canvas.height/2 + 30 ,"white","25px Tahoma","center",opacity);
+
         opacity = opacity + 0.005;
       }
 
