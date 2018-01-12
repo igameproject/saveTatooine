@@ -42,8 +42,8 @@
   window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
-    var width = canvas.width = window.innerWidth;
-    var height = canvas.height = window.innerHeight;
+    var width = canvas.width = 800;
+    var height = canvas.height =600;
     centerX = width / 2;
     centerY = height / 2;
     planetDia = 220;
@@ -85,7 +85,7 @@
         colorText("Save the planet by destroying incoming spaceships",canvas.width/2,200 ,"white","30px Tahoma","center",opacity);
         colorText("Arrow Keys for Movements",canvas.width/2 ,250 ,"#b20000","20px Tahoma","center",opacity);
         colorText("[X] for Shooting",canvas.width/2,280 ,"#b20000","20px Tahoma","center",opacity);
-        colorText('Press [Enter] to Start game',canvas.width/2 ,canvas.height/2 ,"white","25px Tahoma","center",opacity);
+        colorText('Press [Enter] to Start game',canvas.width/2 ,canvas.height/2 + 30 ,"white","25px Tahoma","center",opacity);
         opacity = opacity + 0.005;
       }
 
